@@ -1,0 +1,66 @@
+name: Deploy
+
+# Publishes repo.rossmel.com: the website, the [ros] packages (release x86_64 of this repo) and
+# the [ross] repositories of the programs (from each program's newest release). Binaries are
+# never committed: every deploy downloads them again.
+#
+# Runs when this repo changes (a program's release pushes its version to sources/, the rOS
+# publish script runs it by hand) and once a day as a fallback.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '17 6 * * *'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Fetch ross_visualizer
+        run: |
+          set -euo pipefail
+          repo=rossmelabasto/ross_visualizer
+          tag=$(gh release list -R "$repo" --limit 1 --json tagName --jq '.[0].tagName')
+          mkdir -p _site fetched/visualizer
+          echo "$tag" > fetched/visualizer/version
+          gh release download "$tag" -R "$repo" --pattern ross-visualizer-repos.tar.gz --output repos.tar.gz
+          tar xzf repos.tar.gz -C _site
+          for f in CHANGELOG.md CHANGELOG.es.md; do
+            gh api "repos/$repo/contents/$f?ref=$tag" -H 'Accept: application/vnd.github.raw' > "fetched/visualizer/$f"
+          done
+          gh api "repos/$repo/contents/scripts/check.sh?ref=$tag" -H 'Accept: application/vnd.github.raw' > _site/check.sh
+      - name: Fetch the rOS packages
+        run: |
+          set -euo pipefail
+          mkdir -p _site/x86_64
+          gh release download x86_64 -R "$GITHUB_REPOSITORY" --dir _site/x86_64
+          mv _site/x86_64/ros.gpg _site/ros.gpg
+          mkdir -p fetched/ros
+          ls _site/x86_64 | while read -r f; do : > "fetched/ros/$f"; done
+          # pacman asks for these names; the release stores the database files under them.
+          ls -la _site/x86_64
+      - run: node build.mjs _site
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4

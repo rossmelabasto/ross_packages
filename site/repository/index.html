@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>(function(){var l;try{l=localStorage.getItem('lang')}catch(e){}if(l!=='en'&&l!=='es'){var n=(navigator.languages&&navigator.languages[0])||navigator.language||'en';l=/^es/i.test(n)?'es':'en'}document.documentElement.dataset.lang=l;document.documentElement.lang=l})();</script>
+<title>Repository · rOS</title>
+<meta name="title-en" content="Repository · rOS">
+<meta name="title-es" content="Repositorio · rOS">
+<meta name="description" content="How to add the signed package repositories of rOS and Rossmel's programs to pacman, APT or DNF.">
+<meta name="theme-color" content="#0b0d0a">
+<link rel="icon" href="../assets/ros-logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../"><img src="../assets/ros-logo-white.svg" alt=""><span>rOS</span><span class="sub">/ packages</span></a>
+    <nav class="nav">
+      <a href="../#programs"><span lang="en">Programs</span><span lang="es">Programas</span></a>
+      <a href="../#ros-packages"><span lang="en">rOS packages</span><span lang="es">Paquetes de rOS</span></a>
+      <a href="./" aria-current="page"><span lang="en">Repository</span><span lang="es">Repositorio</span></a>
+      <a href="https://ros.rossmel.com">rOS ↗</a>
+    </nav>
+    <button class="lang" type="button">ES</button>
+  </div>
+</header>
+
+<main class="wrap narrow">
+  <section class="hero" style="padding-bottom: 8px">
+    <p class="eyebrow">repo.rossmel.com</p>
+    <h1 lang="en">Add the repository</h1>
+    <h1 lang="es">Agregar el repositorio</h1>
+    <p class="lead" lang="en">There are two. <code>[ross]</code> has my programs and works on any distribution. <code>[ros]</code> has the packages of rOS itself and is only meant for rOS.</p>
+    <p class="lead" lang="es">Hay dos. <code>[ross]</code> tiene mis programas y funciona en cualquier distribución. <code>[ros]</code> tiene los paquetes del propio rOS y es solo para rOS.</p>
+  </section>
+
+  <section id="ross">
+    <h2 lang="en">Programs: <code>[ross]</code></h2>
+    <h2 lang="es">Programas: <code>[ross]</code></h2>
+    <p lang="en">Add it once and then install any program from it, like <a href="../ross-visualizer/">ross_visualizer</a>.</p>
+    <p lang="es">Lo agregas una vez y desde ahí instalas cualquier programa, como <a href="../ross-visualizer/">ross_visualizer</a>.</p>
+
+    <div class="tabs" role="tablist" aria-label="Distribution">
+      <button role="tab" type="button" aria-selected="true" aria-controls="r-arch" id="rb-arch" data-os="arch">CachyOS · Arch</button>
+      <button role="tab" type="button" aria-selected="false" aria-controls="r-deb" id="rb-deb" data-os="deb">Ubuntu · Debian</button>
+      <button role="tab" type="button" aria-selected="false" aria-controls="r-rpm" id="rb-rpm" data-os="rpm">Fedora</button>
+    </div>
+
+    <div class="panel" role="tabpanel" id="r-arch" aria-labelledby="rb-arch">
+      <p lang="en">Import and trust the signing key, then add the repository to <code>/etc/pacman.conf</code>:</p>
+      <p lang="es">Importa y confía en la clave de firma, y agrega el repositorio a <code>/etc/pacman.conf</code>:</p>
+      <div class="code"><pre><code>curl -fsSL https://repo.rossmel.com/key.asc | sudo pacman-key --add -
+sudo pacman-key --lsign-key C08F57FCE06B95B52145012C274187B9D5E9FFEB
+printf '\n[ross]\nServer = https://repo.rossmel.com/arch/x86_64\n' | sudo tee -a /etc/pacman.conf
+sudo pacman -Sy</code></pre></div>
+      <p class="small" lang="en">To remove it, delete the <code>[ross]</code> block from <code>/etc/pacman.conf</code>.</p>
+      <p class="small" lang="es">Para quitarlo, borra el bloque <code>[ross]</code> de <code>/etc/pacman.conf</code>.</p>
+    </div>
+
+    <div class="panel" role="tabpanel" id="r-deb" aria-labelledby="rb-deb" hidden>
+      <p lang="en">Ubuntu 22.04 or newer, Debian 13, Linux Mint and Pop!_OS:</p>
+      <p lang="es">Ubuntu 22.04 o más nueva, Debian 13, Linux Mint y Pop!_OS:</p>
+      <div class="code"><pre><code>curl -fsSL https://repo.rossmel.com/key.asc | sudo gpg --dearmor -o /usr/share/keyrings/ross.gpg
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ross.gpg] https://repo.rossmel.com/apt stable main" | sudo tee /etc/apt/sources.list.d/ross.list
+sudo apt update</code></pre></div>
+      <p class="small" lang="en">To remove it: <code>sudo rm /etc/apt/sources.list.d/ross.list /usr/share/keyrings/ross.gpg</code></p>
+      <p class="small" lang="es">Para quitarlo: <code>sudo rm /etc/apt/sources.list.d/ross.list /usr/share/keyrings/ross.gpg</code></p>
+    </div>
+
+    <div class="panel" role="tabpanel" id="r-rpm" aria-labelledby="rb-rpm" hidden>
+      <div class="code"><pre><code>sudo curl -fsSL https://repo.rossmel.com/rpm/ross.repo -o /etc/yum.repos.d/ross.repo</code></pre></div>
+      <p lang="en">The first time you install from it, dnf asks whether you trust the key. Check that the fingerprint matches the one below.</p>
+      <p lang="es">La primera vez que instalas desde ahí, dnf pregunta si confías en la clave. Revisa que la huella coincida con la de abajo.</p>
+      <p class="small" lang="en">To remove it: <code>sudo rm /etc/yum.repos.d/ross.repo</code></p>
+      <p class="small" lang="es">Para quitarlo: <code>sudo rm /etc/yum.repos.d/ross.repo</code></p>
+    </div>
+
+    <p class="small"><span lang="en">Signing key</span><span lang="es">Clave de firma</span>: <code>C08F 57FC E06B 95B5 2145 012C 2741 87B9 D5E9 FFEB</code></p>
+  </section>
+
+  <section id="ros">
+    <h2 lang="en">rOS packages: <code>[ros]</code></h2>
+    <h2 lang="es">Paquetes de rOS: <code>[ros]</code></h2>
+    <p lang="en">For rOS and Arch-based systems that want to try its pieces. These packages change the desktop and the system defaults, so add them knowing that rOS is still in development. The second <code>Server</code> is a mirror on GitHub Releases.</p>
+    <p lang="es">Para rOS y sistemas basados en Arch que quieran probar sus piezas. Estos paquetes cambian el escritorio y los valores por defecto del sistema, así que agrégalos sabiendo que rOS sigue en desarrollo. El segundo <code>Server</code> es un espejo en GitHub Releases.</p>
+    <div class="code"><pre><code>curl -fsSL https://repo.rossmel.com/ros.gpg | sudo pacman-key --add -
+sudo pacman-key --lsign-key ACEE9BCE9F03BA05E7B04DBAA56F95B047B9D345
+sudo tee -a /etc/pacman.conf &lt;&lt;'EOF'
+
+[ros]
+SigLevel = Required DatabaseRequired
+Server = https://repo.rossmel.com/$arch
+Server = https://github.com/rossmelabasto/ross_ros_repo/releases/download/$arch
+EOF
+sudo pacman -Sy</code></pre></div>
+    <p class="small"><span lang="en">Signing key</span><span lang="es">Clave de firma</span>: <code>ACEE 9BCE 9F03 BA05 E7B0 4DBA A56F 95B0 47B9 D345</code></p>
+  </section>
+
+  <section id="moved">
+    <h2 lang="en">Moved from ros.rossmel.com</h2>
+    <h2 lang="es">Si lo agregaste en ros.rossmel.com</h2>
+    <p lang="en">The program repository used to live at <code>ros.rossmel.com</code>, which is now the home of rOS. The old address keeps working for a while, but switch to the new one when you can:</p>
+    <p lang="es">El repositorio de programas antes vivía en <code>ros.rossmel.com</code>, que ahora es la página de rOS. La dirección vieja sigue funcionando un tiempo, pero cámbiala a la nueva cuando puedas:</p>
+    <div class="code"><pre><code># pacman
+sudo sed -i 's#ros.rossmel.com/arch#repo.rossmel.com/arch#' /etc/pacman.conf
+# APT
+sudo sed -i 's#ros.rossmel.com#repo.rossmel.com#' /etc/apt/sources.list.d/ross.list
+# DNF
+sudo curl -fsSL https://repo.rossmel.com/rpm/ross.repo -o /etc/yum.repos.d/ross.repo</code></pre></div>
+    <p class="small" lang="en">The packages and the key are the same, so nothing gets reinstalled.</p>
+    <p class="small" lang="es">Los paquetes y la clave son los mismos, así que no se reinstala nada.</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span lang="en">Made by <a href="https://portfolio.rossmel.com">Rossmel Abasto</a></span>
+    <span lang="es">Hecho por <a href="https://portfolio.rossmel.com">Rossmel Abasto</a></span>
+    <nav>
+      <a href="https://ros.rossmel.com">rOS</a>
+      <a href="../"><span lang="en">Packages</span><span lang="es">Paquetes</span></a>
+      <a href="https://github.com/rossmelabasto/ross_ros_repo">GitHub</a>
+    </nav>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<svg version="1.1" viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg">
+ <g fill="#eef2ea">
+  <path d="m460 200 60-120v520h-60z"/>
+  <path d="m460 600-4.5e-4 -60h-170l-29.995 60z"/>
+  <path d="m460 319.9v-119.9l-420 840h60z"/>
+  <path d="m360 540-60 1e-3v500l60-0.013z"/>
+ </g>
+ <g fill="#eef2ea" style="">
+  <path d="m620 200-60-120v520h60z"/>
+  <path d="m620 319.9v-119.9l200 400h-60z"/>
+  <path d="m820 600-30-60h-170l5e-3 60z"/>
+ </g>
+ <g fill="#eef2ea">
+  <path d="m620 640-60 4.6e-4v220l60-5e-3z"/>
+  <path d="m870 700-30.001-60h-220l5e-3 60z"/>
+  <path d="m1040 1040-30-60h-450l0.01 60z"/>
+  <path d="m950 860-30-60h-300l7e-3 60z"/>
+  <path d="m860 800h60l120 240h-60z"/>
+ </g>
+</svg>

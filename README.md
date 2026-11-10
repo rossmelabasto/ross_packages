@@ -1,26 +1,25 @@
 # ross_ros_repo
 
-Espejo del repositorio pacman de **rOS**, la distro personal de Rossmel basada en Arch Linux
-(niri + DankMaterialShell). El repo principal es https://repo.rossmel.com; este espejo existe
-para que `pacman -Syu` siga funcionando si ese servidor no responde.
+The source of <https://repo.rossmel.com>: the website for my programs and the signed package
+repositories behind it.
 
-Los paquetes viven como archivos del release [`x86_64`](../../releases/tag/x86_64). Están firmados
-y pacman rechaza cualquiera que no tenga una firma válida de esta llave:
+- **`[ross]`** has my programs for any distribution: pacman, APT and DNF, plus AppImages.
+  Each program's release workflow builds them; see
+  [ross_visualizer](https://github.com/rossmelabasto/ross_visualizer).
+- **`[ros]`** has the packages of [rOS](https://ros.rossmel.com), my flavor of Arch Linux. They
+  are files of the [`x86_64`](../../releases/tag/x86_64) release of this repo, which is also the
+  fallback `Server` when the site doesn't answer.
 
-```
-rOS packages <packages@rossmel.com>
-ACEE 9BCE 9F03 BA05 E7B0  4DBA A56F 95B0 47B9 D345
-```
+No binaries live in git. `.github/workflows/deploy.yml` downloads the newest packages on each
+deploy, runs `build.mjs` over `site/` and publishes everything to GitHub Pages. A program's
+release triggers it by pushing its version to `sources/`.
 
-## Uso
+## Using `[ros]`
 
 ```sh
-curl -O https://repo.rossmel.com/ros.gpg
-sudo pacman-key --add ros.gpg
+curl -fsSL https://repo.rossmel.com/ros.gpg | sudo pacman-key --add -
 sudo pacman-key --lsign-key ACEE9BCE9F03BA05E7B04DBAA56F95B047B9D345
 ```
-
-En `/etc/pacman.conf`:
 
 ```ini
 [ros]
@@ -29,4 +28,6 @@ Server = https://repo.rossmel.com/$arch
 Server = https://github.com/rossmelabasto/ross_ros_repo/releases/download/$arch
 ```
 
-Este repositorio no tiene código: lo actualiza automáticamente el script de publicación de rOS.
+pacman rejects any package without a valid signature from that key
+(`rOS packages <packages@rossmel.com>`, `ACEE 9BCE 9F03 BA05 E7B0 4DBA A56F 95B0 47B9 D345`).
+Instructions for `[ross]` are at <https://repo.rossmel.com/repository/>.

@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>(function(){var l;try{l=localStorage.getItem('lang')}catch(e){}if(l!=='en'&&l!=='es'){var n=(navigator.languages&&navigator.languages[0])||navigator.language||'en';l=/^es/i.test(n)?'es':'en'}document.documentElement.dataset.lang=l;document.documentElement.lang=l})();</script>
+<title>ross_visualizer · rOS packages</title>
+<meta name="title-en" content="ross_visualizer · rOS packages">
+<meta name="title-es" content="ross_visualizer · paquetes de rOS">
+<meta name="description" content="A music visualizer for Linux that listens to everything your computer plays and paints it with the album art. Install it with pacman, APT, DNF or as an AppImage.">
+<meta name="theme-color" content="#0b0d0a">
+<link rel="icon" href="../assets/ross-visualizer.png">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../"><img src="../assets/ros-logo-white.svg" alt=""><span>rOS</span><span class="sub">/ packages</span></a>
+    <nav class="nav">
+      <a href="#install"><span lang="en">Install</span><span lang="es">Instalar</span></a>
+      <a href="#shortcuts"><span lang="en">Shortcuts</span><span lang="es">Atajos</span></a>
+      <a href="#requirements"><span lang="en">Requirements</span><span lang="es">Requisitos</span></a>
+      <a href="#changes"><span lang="en">Changes</span><span lang="es">Cambios</span></a>
+    </nav>
+    <button class="lang" type="button">ES</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow"><span class="pill"><span lang="en">alpha</span><span lang="es">alfa</span></span> v@VIS_VERSION@ · Linux</p>
+      <h1>ross_visualizer</h1>
+      <p class="lead" lang="en">Listens to everything your computer plays and paints it with the colors of the album art. Full screen, or as an overlay above your windows that lets clicks through. No audio source to pick and no account to sign in to.</p>
+      <p class="lead" lang="es">Escucha todo lo que suena en tu compu y lo pinta con los colores de la portada. En pantalla completa o como overlay encima de tus ventanas, que deja pasar los clics. Sin elegir fuente de audio y sin iniciar sesión.</p>
+      <div class="actions">
+        <a class="btn primary" href="#install"><span lang="en">Install</span><span lang="es">Instalar</span></a>
+        <a class="btn" href="#check"><span lang="en">Will it work on my computer?</span><span lang="es">¿Va a funcionar en mi compu?</span></a>
+        <a class="btn" href="https://visualizer.rossmel.com"><span lang="en">Try the web demo</span><span lang="es">Probar la demo web</span></a>
+      </div>
+      <div class="shots" aria-hidden="true">
+        <img src="shots/galaxy.jpg" alt="" loading="lazy">
+        <img src="shots/aurora.jpg" alt="" loading="lazy">
+        <img src="shots/kaleido.jpg" alt="" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="narrow">
+    <section style="padding-top: 8px">
+      <div class="callout">
+        <p lang="en"><strong>It's an alpha.</strong> It works, but expect rough edges. If something looks off or doesn't run on your system, <a href="https://github.com/rossmelabasto/ross_visualizer/issues">open an issue</a> with the output of the check below.</p>
+        <p lang="es"><strong>Es una alfa.</strong> Funciona, pero todavía puede tener detalles. Si algo se ve raro o no anda en tu sistema, <a href="https://github.com/rossmelabasto/ross_visualizer/issues">abre un issue</a> con la salida de la comprobación de abajo.</p>
+      </div>
+    </section>
+
+    <section id="check">
+      <h2 lang="en">Will it work on my computer?</h2>
+      <h2 lang="es">¿Va a funcionar en mi compu?</h2>
+      <p lang="en">This checks your system and tells you which features will work. It only reads: it installs nothing, asks for no password and sends nothing anywhere. Run it from a terminal on your desktop.</p>
+      <p lang="es">Esto revisa tu sistema y te dice qué funciones van a andar. Solo lee: no instala nada, no pide contraseña y no envía datos a ningún lado. Córrelo desde una terminal de tu escritorio.</p>
+      <div class="code"><pre><code>curl -fsSL https://repo.rossmel.com/check.sh | bash</code></pre></div>
+      <p class="small" lang="en">Rather read it first? It's <a href="https://github.com/rossmelabasto/ross_visualizer/blob/main/scripts/check.sh">on GitHub</a>. Its messages are in Spanish for now.</p>
+      <p class="small" lang="es">¿Prefieres leerlo antes? Está <a href="https://github.com/rossmelabasto/ross_visualizer/blob/main/scripts/check.sh">en GitHub</a>.</p>
+    </section>
+
+    <section id="install">
+      <h2 lang="en">Install</h2>
+      <h2 lang="es">Instalar</h2>
+      <p lang="en">From the signed <a href="../repository/"><code>[ross]</code> repository</a>: you add it once and updates arrive with the rest of your system.</p>
+      <p lang="es">Desde el <a href="../repository/">repositorio firmado <code>[ross]</code></a>: lo agregas una vez y las actualizaciones llegan con las del resto de tu sistema.</p>
+
+      <div class="tabs" role="tablist" aria-label="Distribution">
+        <button role="tab" type="button" aria-selected="true" aria-controls="t-arch" id="b-arch" data-os="arch">CachyOS · Arch</button>
+        <button role="tab" type="button" aria-selected="false" aria-controls="t-deb" id="b-deb" data-os="deb">Ubuntu · Debian</button>
+        <button role="tab" type="button" aria-selected="false" aria-controls="t-rpm" id="b-rpm" data-os="rpm">Fedora</button>
+        <button role="tab" type="button" aria-selected="false" aria-controls="t-app" id="b-app">AppImage</button>
+      </div>
+
+      <div class="panel" role="tabpanel" id="t-arch" aria-labelledby="b-arch">
+        <h3 lang="en">Add the repository and install</h3>
+        <h3 lang="es">Agregar el repositorio e instalar</h3>
+        <div class="code"><pre><code>curl -fsSL https://repo.rossmel.com/key.asc | sudo pacman-key --add -
+sudo pacman-key --lsign-key C08F57FCE06B95B52145012C274187B9D5E9FFEB
+printf '\n[ross]\nServer = https://repo.rossmel.com/arch/x86_64\n' | sudo tee -a /etc/pacman.conf
+sudo pacman -Syu ross-visualizer-bin</code></pre></div>
+        <h3 lang="en">Update</h3><h3 lang="es">Actualizar</h3>
+        <div class="code"><pre><code>sudo pacman -Syu</code></pre></div>
+        <h3 lang="en">Uninstall</h3><h3 lang="es">Desinstalar</h3>
+        <div class="code"><pre><code>sudo pacman -Rns ross-visualizer-bin</code></pre></div>
+      </div>
+
+      <div class="panel" role="tabpanel" id="t-deb" aria-labelledby="b-deb" hidden>
+        <h3 lang="en">Add the repository and install</h3>
+        <h3 lang="es">Agregar el repositorio e instalar</h3>
+        <div class="code"><pre><code>curl -fsSL https://repo.rossmel.com/key.asc | sudo gpg --dearmor -o /usr/share/keyrings/ross.gpg
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ross.gpg] https://repo.rossmel.com/apt stable main" | sudo tee /etc/apt/sources.list.d/ross.list
+sudo apt update
+sudo apt install ross-visualizer</code></pre></div>
+        <h3 lang="en">Update</h3><h3 lang="es">Actualizar</h3>
+        <div class="code"><pre><code>sudo apt update &amp;&amp; sudo apt upgrade</code></pre></div>
+        <h3 lang="en">Uninstall</h3><h3 lang="es">Desinstalar</h3>
+        <div class="code"><pre><code>sudo apt remove ross-visualizer</code></pre></div>
+      </div>
+
+      <div class="panel" role="tabpanel" id="t-rpm" aria-labelledby="b-rpm" hidden>
+        <h3 lang="en">Add the repository and install</h3>
+        <h3 lang="es">Agregar el repositorio e instalar</h3>
+        <div class="code"><pre><code>sudo curl -fsSL https://repo.rossmel.com/rpm/ross.repo -o /etc/yum.repos.d/ross.repo
+sudo dnf install ross-visualizer</code></pre></div>
+        <p class="small" lang="en">dnf asks whether you trust the key the first time. Its fingerprint is <code>C08F 57FC E06B 95B5 2145 012C 2741 87B9 D5E9 FFEB</code>.</p>
+        <p class="small" lang="es">La primera vez dnf pregunta si confías en la clave. Su huella es <code>C08F 57FC E06B 95B5 2145 012C 2741 87B9 D5E9 FFEB</code>.</p>
+        <h3 lang="en">Update</h3><h3 lang="es">Actualizar</h3>
+        <div class="code"><pre><code>sudo dnf upgrade</code></pre></div>
+        <h3 lang="en">Uninstall</h3><h3 lang="es">Desinstalar</h3>
+        <div class="code"><pre><code>sudo dnf remove ross-visualizer</code></pre></div>
+      </div>
+
+      <div class="panel" role="tabpanel" id="t-app" aria-labelledby="b-app" hidden>
+        <p lang="en">Download the AppImage of <a href="https://github.com/rossmelabasto/ross_visualizer/releases/tag/v@VIS_VERSION@">version @VIS_VERSION@</a>, make it executable and run it. It works on any distribution, but it doesn't update itself and your system still needs <code>pipewire</code> and <code>playerctl</code>.</p>
+        <p lang="es">Descarga el AppImage de la <a href="https://github.com/rossmelabasto/ross_visualizer/releases/tag/v@VIS_VERSION@">versión @VIS_VERSION@</a>, hazlo ejecutable y ábrelo. Sirve para cualquier distribución, pero no se actualiza solo y tu sistema igual necesita <code>pipewire</code> y <code>playerctl</code>.</p>
+        <div class="code"><pre><code>chmod +x ross_visualizer_@VIS_VERSION@_amd64.AppImage
+./ross_visualizer_@VIS_VERSION@_amd64.AppImage</code></pre></div>
+      </div>
+      <p class="small" lang="en">The first time you open it, a short tour shows the scenes, the overlay and the keyboard shortcuts for your desktop.</p>
+      <p class="small" lang="es">La primera vez que la abres, un tutorial corto te muestra las escenas, el overlay y los atajos de teclado para tu escritorio.</p>
+    </section>
+
+    <section id="shortcuts">
+      <h2 lang="en">Keyboard shortcuts</h2>
+      <h2 lang="es">Atajos de teclado</h2>
+      <p lang="en">Two shortcuts turn the overlay on and switch its style from anywhere, without opening the app. Every desktop keeps its shortcuts in its own config, so the app can't add them itself.</p>
+      <p lang="es">Con dos atajos prendes el overlay y cambias de estilo desde cualquier lado, sin abrir la app. Cada escritorio guarda sus atajos en su propia configuración, así que la app no puede agregarlos sola.</p>
+      <div class="table">
+        <table>
+          <thead><tr><th lang="en">Shortcut</th><th lang="es">Atajo</th><th lang="en">Does</th><th lang="es">Qué hace</th></tr></thead>
+          <tbody>
+            <tr><td><code>Super+Ctrl+V</code></td><td><span lang="en">Turns the overlay on or off</span><span lang="es">Prende o apaga el overlay</span></td></tr>
+            <tr><td><code>Super+Ctrl+B</code></td><td><span lang="en">Next overlay style</span><span lang="es">Siguiente estilo de overlay</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="Desktop">
+        <button role="tab" type="button" aria-selected="true" aria-controls="k-niri" id="kb-niri">niri</button>
+        <button role="tab" type="button" aria-selected="false" aria-controls="k-hypr" id="kb-hypr">Hyprland</button>
+        <button role="tab" type="button" aria-selected="false" aria-controls="k-sway" id="kb-sway">Sway</button>
+        <button role="tab" type="button" aria-selected="false" aria-controls="k-kde" id="kb-kde">KDE Plasma</button>
+        <button role="tab" type="button" aria-selected="false" aria-controls="k-other" id="kb-other"><span lang="en">Others</span><span lang="es">Otros</span></button>
+      </div>
+
+      <div class="panel" role="tabpanel" id="k-niri" aria-labelledby="kb-niri">
+        <p lang="en">Inside the <code>binds { }</code> block of <code>~/.config/niri/config.kdl</code>. niri picks them up when you save.</p>
+        <p lang="es">Dentro del bloque <code>binds { }</code> de <code>~/.config/niri/config.kdl</code>. niri las toma al guardar.</p>
+        <div class="code"><pre><code>Mod+Ctrl+V hotkey-overlay-title="Visualizer: overlay on/off" { spawn "ross-visualizer" "overlay" "toggle"; }
+Mod+Ctrl+B hotkey-overlay-title="Visualizer: next overlay style" { spawn "ross-visualizer" "overlay" "next"; }</code></pre></div>
+      </div>
+      <div class="panel" role="tabpanel" id="k-hypr" aria-labelledby="kb-hypr" hidden>
+        <p lang="en">In <code>~/.config/hypr/hyprland.conf</code>. Hyprland picks them up when you save.</p>
+        <p lang="es">En <code>~/.config/hypr/hyprland.conf</code>. Hyprland las toma al guardar.</p>
+        <div class="code"><pre><code>bind = SUPER CTRL, V, exec, ross-visualizer overlay toggle
+bind = SUPER CTRL, B, exec, ross-visualizer overlay next</code></pre></div>
+      </div>
+      <div class="panel" role="tabpanel" id="k-sway" aria-labelledby="kb-sway" hidden>
+        <p lang="en">In <code>~/.config/sway/config</code>, then run <code>swaymsg reload</code>.</p>
+        <p lang="es">En <code>~/.config/sway/config</code>, y luego corre <code>swaymsg reload</code>.</p>
+        <div class="code"><pre><code>bindsym Mod4+Ctrl+v exec ross-visualizer overlay toggle
+bindsym Mod4+Ctrl+b exec ross-visualizer overlay next</code></pre></div>
+      </div>
+      <div class="panel" role="tabpanel" id="k-kde" aria-labelledby="kb-kde" hidden>
+        <ol class="steps" lang="en">
+          <li>Open System Settings → Keyboard → Shortcuts.</li>
+          <li>Add New → Command or Script. Paste the first command and give it <code>Meta+Ctrl+V</code>.</li>
+          <li>Do the same with the second command and <code>Meta+Ctrl+B</code>.</li>
+        </ol>
+        <ol class="steps" lang="es">
+          <li>Abre Preferencias del sistema → Teclado → Atajos.</li>
+          <li>Añadir nuevo → Comando o script. Pega el primer comando y asígnale <code>Meta+Ctrl+V</code>.</li>
+          <li>Repite con el segundo comando y <code>Meta+Ctrl+B</code>.</li>
+        </ol>
+        <div class="code"><pre><code>ross-visualizer overlay toggle
+ross-visualizer overlay next</code></pre></div>
+      </div>
+      <div class="panel" role="tabpanel" id="k-other" aria-labelledby="kb-other" hidden>
+        <p lang="en">In your desktop's settings, give each command a shortcut. GNOME and X11 have no overlay, so you don't need them there.</p>
+        <p lang="es">En la configuración de tu escritorio, asigna un atajo a cada comando. En GNOME y en X11 no hay overlay, así que no hacen falta.</p>
+        <div class="code"><pre><code>ross-visualizer overlay toggle
+ross-visualizer overlay next</code></pre></div>
+      </div>
+      <p class="small" lang="en">With the AppImage, replace <code>ross-visualizer</code> with the file's path. With no setup at all: right-click the app's icon in your launcher or dock and pick "Overlay on/off" or "Next overlay style".</p>
+      <p class="small" lang="es">Con el AppImage, cambia <code>ross-visualizer</code> por la ruta del archivo. Sin configurar nada: clic derecho en el ícono de la app en tu lanzador o dock y elige "Overlay sí/no" o "Siguiente estilo de overlay".</p>
+    </section>
+
+    <section id="requirements">
+      <h2 lang="en">Requirements</h2>
+      <h2 lang="es">Requisitos</h2>
+      <p lang="en">The repositories install every dependency. Only these depend on your system:</p>
+      <p lang="es">Los repositorios instalan todas las dependencias. Solo esto depende de tu sistema:</p>
+      <div class="table">
+        <table>
+          <thead><tr><th lang="en">Feature</th><th lang="es">Función</th><th lang="en">Needs</th><th lang="es">Qué necesita</th></tr></thead>
+          <tbody>
+            <tr><td><span lang="en">The app and its scenes</span><span lang="es">La app y las escenas</span></td><td><span lang="en">Linux x86_64 with glibc 2.35 or newer and a GPU with WebGL2</span><span lang="es">Linux x86_64 con glibc 2.35 o más nueva y una GPU con WebGL2</span></td></tr>
+            <tr><td><span lang="en">Reacting to the music</span><span lang="es">Reaccionar a la música</span></td><td><span lang="en">PipeWire running. PulseAudio alone isn't enough</span><span lang="es">PipeWire corriendo. PulseAudio solo no alcanza</span></td></tr>
+            <tr><td><span lang="en">Song, artwork and controls</span><span lang="es">Canción, portada y controles</span></td><td><span lang="en">A player with MPRIS: Spotify, a browser and most Linux players</span><span lang="es">Un reproductor con MPRIS: Spotify, un navegador y casi todos los de Linux</span></td></tr>
+            <tr><td><span lang="en">Overlay above your windows</span><span lang="es">Overlay sobre las ventanas</span></td><td><span lang="en">Wayland with layer-shell: KDE Plasma, Hyprland, Sway, niri and others. On GNOME or X11 you get full screen without the overlay</span><span lang="es">Wayland con layer-shell: KDE Plasma, Hyprland, Sway, niri y otros. En GNOME o X11 tienes la pantalla completa, sin overlay</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="packages">
+      <h2 lang="en">Packages</h2>
+      <h2 lang="es">Paquetes</h2>
+      <div class="table">
+        <table>
+          <thead><tr><th lang="en">Format</th><th lang="es">Formato</th><th lang="en">For</th><th lang="es">Para</th><th lang="en">Package</th><th lang="es">Paquete</th></tr></thead>
+          <tbody>
+            <tr><td>pacman</td><td>CachyOS, Arch, EndeavourOS, Manjaro</td><td><code>ross-visualizer-bin</code></td></tr>
+            <tr><td>APT</td><td><span lang="en">Ubuntu 22.04 or newer</span><span lang="es">Ubuntu 22.04 o más nueva</span>, Debian 13, Linux Mint, Pop!_OS</td><td><code>ross-visualizer</code></td></tr>
+            <tr><td>DNF</td><td>Fedora</td><td><code>ross-visualizer</code></td></tr>
+            <tr><td>AppImage</td><td><span lang="en">Any x86_64 distribution</span><span lang="es">Cualquier distribución x86_64</span></td><td><a href="https://github.com/rossmelabasto/ross_visualizer/releases"><span lang="en">Releases</span><span lang="es">Versiones</span></a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small" lang="en">Before it's published, every version is installed and opened on clean CachyOS, Arch, Ubuntu 22.04 and 24.04, Debian 13 and Fedora systems. AUR is coming soon.</p>
+      <p class="small" lang="es">Antes de publicarse, cada versión se instala y se abre en sistemas limpios de CachyOS, Arch, Ubuntu 22.04 y 24.04, Debian 13 y Fedora. AUR llega pronto.</p>
+    </section>
+
+    <section id="changes">
+      <h2 lang="en">Changes</h2>
+      <h2 lang="es">Cambios</h2>
+      <div class="changelog" lang="en">
+@VIS_CHANGELOG_EN@
+      </div>
+      <div class="changelog" lang="es">
+@VIS_CHANGELOG_ES@
+      </div>
+    </section>
+  </div></div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span lang="en">Made by <a href="https://portfolio.rossmel.com">Rossmel Abasto</a></span>
+    <span lang="es">Hecho por <a href="https://portfolio.rossmel.com">Rossmel Abasto</a></span>
+    <nav>
+      <a href="https://github.com/rossmelabasto/ross_visualizer"><span lang="en">Source code</span><span lang="es">Código</span></a>
+      <a href="https://github.com/rossmelabasto/ross_visualizer/issues"><span lang="en">Report a problem</span><span lang="es">Reportar un problema</span></a>
+      <a href="https://visualizer.rossmel.com"><span lang="en">Web demo</span><span lang="es">Demo web</span></a>
+      <a href="../"><span lang="en">All packages</span><span lang="es">Todos los paquetes</span></a>
+    </nav>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>
