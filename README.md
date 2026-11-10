@@ -1,4 +1,4 @@
-# ross_ros_repo
+# ross_packages
 
 The source of <https://repo.rossmel.com>: the website for my programs and the signed package
 repositories behind it.
@@ -25,7 +25,7 @@ sudo pacman-key --lsign-key ACEE9BCE9F03BA05E7B04DBAA56F95B047B9D345
 [ros]
 SigLevel = Required DatabaseRequired
 Server = https://repo.rossmel.com/$arch
-Server = https://github.com/rossmelabasto/ross_ros_repo/releases/download/$arch
+Server = https://github.com/rossmelabasto/ross_packages/releases/download/$arch
 ```
 
 pacman rejects any package without a valid signature from that key
