@@ -7,7 +7,7 @@
 <title>Repository · rOS</title>
 <meta name="title-en" content="Repository · rOS">
 <meta name="title-es" content="Repositorio · rOS">
-<meta name="description" content="How to add the signed package repositories of rOS and Rossmel's programs to pacman, APT or DNF.">
+<meta name="description" content="How to add the signed repository of Rossmel's programs to pacman, APT or DNF.">
 <meta name="theme-color" content="#0b0d0a">
 <link rel="icon" href="../assets/ros-logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../assets/style.css">
@@ -18,7 +18,6 @@
     <a class="brand" href="../"><img src="../assets/ros-logo-white.svg" alt=""><span>rOS</span><span class="sub">/ packages</span></a>
     <nav class="nav">
       <a href="../#programs"><span lang="en">Programs</span><span lang="es">Programas</span></a>
-      <a href="../#ros-packages"><span lang="en">rOS packages</span><span lang="es">Paquetes de rOS</span></a>
       <a href="./" aria-current="page"><span lang="en">Repository</span><span lang="es">Repositorio</span></a>
       <a href="https://ros.rossmel.com">rOS ↗</a>
     </nav>
@@ -31,15 +30,15 @@
     <p class="eyebrow">repo.rossmel.com</p>
     <h1 lang="en">Add the repository</h1>
     <h1 lang="es">Agregar el repositorio</h1>
-    <p class="lead" lang="en">There are two. <code>[ross]</code> has my programs and works on any distribution. <code>[ros]</code> has the packages of rOS itself and is only meant for rOS.</p>
-    <p class="lead" lang="es">Hay dos. <code>[ross]</code> tiene mis programas y funciona en cualquier distribución. <code>[ros]</code> tiene los paquetes del propio rOS y es solo para rOS.</p>
+    <p class="lead" lang="en">Add it once and install any of my programs from it with your usual package manager. Updates arrive with the rest of your system.</p>
+    <p class="lead" lang="es">Lo agregas una vez e instalas cualquiera de mis programas con tu gestor de paquetes de siempre. Las actualizaciones llegan con las del resto de tu sistema.</p>
   </section>
 
   <section id="ross">
-    <h2 lang="en">Programs: <code>[ross]</code></h2>
-    <h2 lang="es">Programas: <code>[ross]</code></h2>
-    <p lang="en">Add it once and then install any program from it, like <a href="../ross-visualizer/">ross_visualizer</a>.</p>
-    <p lang="es">Lo agregas una vez y desde ahí instalas cualquier programa, como <a href="../ross-visualizer/">ross_visualizer</a>.</p>
+    <h2 lang="en">Pick your system</h2>
+    <h2 lang="es">Elige tu sistema</h2>
+    <p lang="en">Then install a program by its name, like <a href="../ross-visualizer/">ross_visualizer</a>.</p>
+    <p lang="es">Después instalas un programa por su nombre, como <a href="../ross-visualizer/">ross_visualizer</a>.</p>
 
     <div class="tabs" role="tablist" aria-label="Distribution">
       <button role="tab" type="button" aria-selected="true" aria-controls="r-arch" id="rb-arch" data-os="arch">CachyOS · Arch</button>
@@ -77,24 +76,6 @@ sudo apt update</code></pre></div>
     </div>
 
     <p class="small"><span lang="en">Signing key</span><span lang="es">Clave de firma</span>: <code>C08F 57FC E06B 95B5 2145 012C 2741 87B9 D5E9 FFEB</code></p>
-  </section>
-
-  <section id="ros">
-    <h2 lang="en">rOS packages: <code>[ros]</code></h2>
-    <h2 lang="es">Paquetes de rOS: <code>[ros]</code></h2>
-    <p lang="en">For rOS and Arch-based systems that want to try its pieces. These packages change the desktop and the system defaults, so add them knowing that rOS is still in development. The second <code>Server</code> is a mirror on GitHub Releases.</p>
-    <p lang="es">Para rOS y sistemas basados en Arch que quieran probar sus piezas. Estos paquetes cambian el escritorio y los valores por defecto del sistema, así que agrégalos sabiendo que rOS sigue en desarrollo. El segundo <code>Server</code> es un espejo en GitHub Releases.</p>
-    <div class="code"><pre><code>curl -fsSL https://repo.rossmel.com/ros.gpg | sudo pacman-key --add -
-sudo pacman-key --lsign-key ACEE9BCE9F03BA05E7B04DBAA56F95B047B9D345
-sudo tee -a /etc/pacman.conf &lt;&lt;'EOF'
-
-[ros]
-SigLevel = Required DatabaseRequired
-Server = https://repo.rossmel.com/$arch
-Server = https://github.com/rossmelabasto/ross_packages/releases/download/$arch
-EOF
-sudo pacman -Sy</code></pre></div>
-    <p class="small"><span lang="en">Signing key</span><span lang="es">Clave de firma</span>: <code>ACEE 9BCE 9F03 BA05 E7B0 4DBA A56F 95B0 47B9 D345</code></p>
   </section>
 
   <section id="moved">
