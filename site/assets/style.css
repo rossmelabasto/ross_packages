@@ -159,6 +159,7 @@ hr.sep { border: 0; border-top: 1px solid var(--line); margin: 56px 0 0; }
 a.card:hover { border-color: rgba(175, 255, 0, 0.45); transform: translateY(-2px); text-decoration: none; }
 .card-top { display: flex; align-items: center; gap: 14px; }
 .card-top img { width: 48px; height: 48px; border-radius: 12px; }
+.card-top .glyph { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 12px; background: var(--lime-soft); border: 1px solid rgba(175, 255, 0, 0.25); color: var(--lime); font-size: 24px; flex: none; }
 .card h3 { margin: 0; font-size: 19px; }
 .card .meta { font: 12.5px var(--mono); color: var(--muted); }
 .card p { margin: 0; color: #c4cabd; font-size: 15px; }

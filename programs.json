@@ -1,0 +1,5 @@
+[
+  { "name": "ross-visualizer", "repo": "rossmelabasto/ross_visualizer", "page": "ross-visualizer" },
+  { "name": "ross-transcribe", "repo": "rossmelabasto/ross_transcribe", "page": "transcribe" },
+  { "name": "ross-fisheye", "repo": "rossmelabasto/ross_fisheye", "page": "fisheye" }
+]

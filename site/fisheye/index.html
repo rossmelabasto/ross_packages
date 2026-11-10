@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>(function(){var l;try{l=localStorage.getItem('lang')}catch(e){}if(l!=='en'&&l!=='es'){var n=(navigator.languages&&navigator.languages[0])||navigator.language||'en';l=/^es/i.test(n)?'es':'en'}document.documentElement.dataset.lang=l;document.documentElement.lang=l})();</script>
+<title>ross_fisheye · rOS packages</title>
+<meta name="title-en" content="ross_fisheye · rOS packages">
+<meta name="title-es" content="ross_fisheye · paquetes de rOS">
+<meta name="description" content="A fisheye magnifier for Wayland, based on woomer. Install it with pacman, APT or DNF.">
+<meta name="theme-color" content="#0b0d0a">
+<link rel="icon" href="../assets/ros-logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../"><img src="../assets/ros-logo-white.svg" alt=""><span>rOS</span><span class="sub">/ packages</span></a>
+    <nav class="nav">
+      <a href="#install"><span lang="en">Install</span><span lang="es">Instalar</span></a>
+      <a href="#setup"><span lang="en">Shortcut</span><span lang="es">Atajo</span></a>
+      <a href="#use"><span lang="en">Use</span><span lang="es">Uso</span></a>
+      <a href="#changes"><span lang="en">Changes</span><span lang="es">Cambios</span></a>
+    </nav>
+    <button class="lang" type="button">ES</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">v@VERSION:ross-fisheye@ · Wayland</p>
+      <h1>ross_fisheye</h1>
+      <p class="lead" lang="en">A fisheye magnifier for Wayland. Press a shortcut and the screen freezes under a lens that bulges it like cloth pushed up by a glass ball: no hard edge, the middle stretched, the slope lit from above. Press it again to close it.</p>
+      <p class="lead" lang="es">Una lupa de ojo de pez para Wayland. Aprietas un atajo y la pantalla se congela bajo una lente que la abomba como una tela empujada por una bola de cristal: sin borde duro, el centro estirado y la ladera iluminada desde arriba. Lo aprietas otra vez y se cierra.</p>
+      <div class="actions">
+        <a class="btn primary" href="#install"><span lang="en">Install</span><span lang="es">Instalar</span></a>
+        <a class="btn" href="https://github.com/rossmelabasto/ross_fisheye"><span lang="en">Source code</span><span lang="es">Código</span></a>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="narrow">
+    <section style="padding-top: 0">
+      <div class="callout">
+        <p lang="en"><strong>Which desktops?</strong> It needs the wlr-screencopy protocol: niri, Hyprland, Sway, river, Wayfire and others have it. GNOME and KDE Plasma don't, so it won't open there.</p>
+        <p lang="es"><strong>¿En qué escritorios?</strong> Necesita el protocolo wlr-screencopy: lo tienen niri, Hyprland, Sway, river, Wayfire y otros. GNOME y KDE Plasma no, así que ahí no abre.</p>
+      </div>
+    </section>
+
+    <section id="install">
+      <h2 lang="en">Install</h2>
+      <h2 lang="es">Instalar</h2>
+      <p lang="en">From the signed <a href="../repository/">repository</a>. If you haven't added it yet, do that first (one time). Then:</p>
+      <p lang="es">Desde el <a href="../repository/">repositorio firmado</a>. Si todavía no lo agregaste, hazlo primero (una sola vez). Luego:</p>
+      <div class="tabs" role="tablist" aria-label="Distribution">
+        <button role="tab" type="button" aria-selected="true" aria-controls="t-arch" id="b-arch" data-os="arch">CachyOS · Arch</button>
+        <button role="tab" type="button" aria-selected="false" aria-controls="t-deb" id="b-deb" data-os="deb">Ubuntu · Debian</button>
+        <button role="tab" type="button" aria-selected="false" aria-controls="t-rpm" id="b-rpm" data-os="rpm">Fedora</button>
+      </div>
+      <div class="panel" role="tabpanel" id="t-arch" aria-labelledby="b-arch"><div class="code"><pre><code>sudo pacman -Syu ross-fisheye-bin</code></pre></div></div>
+      <div class="panel" role="tabpanel" id="t-deb" aria-labelledby="b-deb" hidden><div class="code"><pre><code>sudo apt update &amp;&amp; sudo apt install ross-fisheye</code></pre></div></div>
+      <div class="panel" role="tabpanel" id="t-rpm" aria-labelledby="b-rpm" hidden><div class="code"><pre><code>sudo dnf install ross-fisheye</code></pre></div></div>
+    </section>
+
+    <section id="setup">
+      <h2 lang="en">Shortcut and full screen</h2>
+      <h2 lang="es">Atajo y pantalla completa</h2>
+      <p lang="en">Give it a shortcut, and a window rule so the lens covers the whole screen (with fractional scaling it can't ask for full screen by itself).</p>
+      <p lang="es">Dale un atajo y una regla de ventana para que la lente cubra toda la pantalla (con escala fraccional no puede pedir la pantalla completa sola).</p>
+      <div class="tabs" role="tablist" aria-label="Desktop">
+        <button role="tab" type="button" aria-selected="true" aria-controls="k-niri" id="kb-niri">niri</button>
+        <button role="tab" type="button" aria-selected="false" aria-controls="k-hypr" id="kb-hypr">Hyprland</button>
+        <button role="tab" type="button" aria-selected="false" aria-controls="k-sway" id="kb-sway">Sway</button>
+      </div>
+      <div class="panel" role="tabpanel" id="k-niri" aria-labelledby="kb-niri">
+        <p lang="en">In <code>~/.config/niri/config.kdl</code>: the shortcut inside <code>binds { }</code>, the rule at the top level.</p>
+        <p lang="es">En <code>~/.config/niri/config.kdl</code>: el atajo dentro de <code>binds { }</code> y la regla afuera.</p>
+        <div class="code"><pre><code>Mod+Shift+Z hotkey-overlay-title="Magnifier" { spawn "ross-fisheye"; }
+
+window-rule {
+    match title="^ross-fisheye$"
+    open-fullscreen true
+}</code></pre></div>
+      </div>
+      <div class="panel" role="tabpanel" id="k-hypr" aria-labelledby="kb-hypr" hidden>
+        <p lang="en">In <code>~/.config/hypr/hyprland.conf</code>:</p>
+        <p lang="es">En <code>~/.config/hypr/hyprland.conf</code>:</p>
+        <div class="code"><pre><code>bind = SUPER SHIFT, Z, exec, ross-fisheye
+windowrulev2 = fullscreen, title:^(ross-fisheye)$</code></pre></div>
+      </div>
+      <div class="panel" role="tabpanel" id="k-sway" aria-labelledby="kb-sway" hidden>
+        <p lang="en">In <code>~/.config/sway/config</code>, then <code>swaymsg reload</code>:</p>
+        <p lang="es">En <code>~/.config/sway/config</code>, y luego <code>swaymsg reload</code>:</p>
+        <div class="code"><pre><code>bindsym Mod4+Shift+z exec ross-fisheye
+for_window [title="^ross-fisheye$"] fullscreen enable</code></pre></div>
+      </div>
+    </section>
+
+    <section id="use">
+      <h2 lang="en">Use</h2>
+      <h2 lang="es">Uso</h2>
+      <div class="table">
+        <table>
+          <tbody>
+            <tr><td lang="en">Scroll wheel</td><td lang="es">Rueda</td><td><span lang="en">Magnification</span><span lang="es">Aumento</span></td></tr>
+            <tr><td lang="en">Shift + scroll wheel</td><td lang="es">Shift + rueda</td><td><span lang="en">Lens radius</span><span lang="es">Radio de la lente</span></td></tr>
+            <tr><td lang="en">Esc, right click or the shortcut again</td><td lang="es">Esc, clic derecho o el atajo otra vez</td><td><span lang="en">Close</span><span lang="es">Cerrar</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p lang="en">It opens on the focused screen (niri, Hyprland and Sway) and shows a still picture taken when it opened. <code>ross-fisheye --zoom</code> is woomer's classic zoom: drag, scroll, and hold Ctrl for a spotlight.</p>
+      <p lang="es">Abre en la pantalla enfocada (niri, Hyprland y Sway) y muestra una foto fija tomada al abrirse. <code>ross-fisheye --zoom</code> es el zoom clásico de woomer: arrastras, usas la rueda y mantienes Ctrl para el foco.</p>
+      <p class="small" lang="en">ross_fisheye is a fork of <a href="https://github.com/coffeeispower/woomer">woomer</a> by Tiago Dinis Ribeiro dos Santos, under the MIT license.</p>
+      <p class="small" lang="es">ross_fisheye es un fork de <a href="https://github.com/coffeeispower/woomer">woomer</a>, de Tiago Dinis Ribeiro dos Santos, con licencia MIT.</p>
+    </section>
+
+    <section id="changes">
+      <h2 lang="en">Changes</h2>
+      <h2 lang="es">Cambios</h2>
+      <div class="changelog" lang="en">
+@CHANGELOG_EN:ross-fisheye@
+      </div>
+      <div class="changelog" lang="es">
+@CHANGELOG_ES:ross-fisheye@
+      </div>
+    </section>
+  </div></div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span lang="en">Made by <a href="https://portfolio.rossmel.com">Rossmel Abasto</a></span>
+    <span lang="es">Hecho por <a href="https://portfolio.rossmel.com">Rossmel Abasto</a></span>
+    <nav>
+      <a href="https://github.com/rossmelabasto/ross_fisheye"><span lang="en">Source code</span><span lang="es">Código</span></a>
+      <a href="https://github.com/rossmelabasto/ross_fisheye/issues"><span lang="en">Report a problem</span><span lang="es">Reportar un problema</span></a>
+      <a href="../"><span lang="en">All packages</span><span lang="es">Todos los paquetes</span></a>
+    </nav>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>

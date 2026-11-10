@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>(function(){var l;try{l=localStorage.getItem('lang')}catch(e){}if(l!=='en'&&l!=='es'){var n=(navigator.languages&&navigator.languages[0])||navigator.language||'en';l=/^es/i.test(n)?'es':'en'}document.documentElement.dataset.lang=l;document.documentElement.lang=l})();</script>
+<title>transcribe · rOS packages</title>
+<meta name="title-en" content="transcribe · rOS packages">
+<meta name="title-es" content="transcribe · paquetes de rOS">
+<meta name="description" content="Local, offline transcription from the terminal, with record to capture from the microphone. Install it with pacman, APT or DNF.">
+<meta name="theme-color" content="#0b0d0a">
+<link rel="icon" href="../assets/ros-logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/style.css">
+<style>.demo { width: 100%; max-width: 860px; border-radius: 14px; border: 1px solid var(--line); margin-top: 40px; display: block; }</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../"><img src="../assets/ros-logo-white.svg" alt=""><span>rOS</span><span class="sub">/ packages</span></a>
+    <nav class="nav">
+      <a href="#install"><span lang="en">Install</span><span lang="es">Instalar</span></a>
+      <a href="#use"><span lang="en">Use</span><span lang="es">Uso</span></a>
+      <a href="#record">record</a>
+      <a href="#changes"><span lang="en">Changes</span><span lang="es">Cambios</span></a>
+    </nav>
+    <button class="lang" type="button">ES</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">v@VERSION:ross-transcribe@ · Linux · <span lang="en">terminal</span><span lang="es">terminal</span></p>
+      <h1>transcribe</h1>
+      <p class="lead" lang="en">Turn audio and video into text from the terminal, on your own computer. Pick files from a list, get the transcript on screen, as a <code>.txt</code> with timestamps or as subtitles. Nothing is uploaded and there's no account: faster-whisper runs locally.</p>
+      <p class="lead" lang="es">Convierte audio y video en texto desde la terminal, en tu propia compu. Eliges los archivos de una lista y obtienes la transcripción en pantalla, en un <code>.txt</code> con tiempos o como subtítulos. No se sube nada y no hay cuenta: faster-whisper corre en tu máquina.</p>
+      <div class="actions">
+        <a class="btn primary" href="#install"><span lang="en">Install</span><span lang="es">Instalar</span></a>
+        <a class="btn" href="https://github.com/rossmelabasto/ross_transcribe"><span lang="en">Source code</span><span lang="es">Código</span></a>
+      </div>
+      <img class="demo" lang="en" src="demo.gif" alt="transcribe picking a file and printing its transcript" loading="lazy">
+      <img class="demo" lang="es" src="demo-es.gif" alt="transcribe eligiendo un archivo y mostrando su transcripción" loading="lazy">
+    </div>
+  </section>
+
+  <div class="wrap"><div class="narrow">
+    <section id="install">
+      <h2 lang="en">Install</h2>
+      <h2 lang="es">Instalar</h2>
+      <p lang="en">From the signed <a href="../repository/">repository</a>. The package brings its own Python, so your distribution's version doesn't matter, and <code>ffmpeg</code> comes as a dependency.</p>
+      <p lang="es">Desde el <a href="../repository/">repositorio firmado</a>. El paquete trae su propio Python, así que la versión de tu distribución no importa, y <code>ffmpeg</code> llega como dependencia.</p>
+
+      <div class="tabs" role="tablist" aria-label="Distribution">
+        <button role="tab" type="button" aria-selected="true" aria-controls="t-arch" id="b-arch" data-os="arch">CachyOS · Arch</button>
+        <button role="tab" type="button" aria-selected="false" aria-controls="t-deb" id="b-deb" data-os="deb">Ubuntu · Debian</button>
+        <button role="tab" type="button" aria-selected="false" aria-controls="t-rpm" id="b-rpm" data-os="rpm">Fedora</button>
+      </div>
+      <div class="panel" role="tabpanel" id="t-arch" aria-labelledby="b-arch">
+        <p lang="en">If you haven't added the repository yet, do that first (<a href="../repository/">one time</a>). Then:</p>
+        <p lang="es">Si todavía no agregaste el repositorio, hazlo primero (<a href="../repository/">una sola vez</a>). Luego:</p>
+        <div class="code"><pre><code>sudo pacman -Syu ross-transcribe-bin</code></pre></div>
+      </div>
+      <div class="panel" role="tabpanel" id="t-deb" aria-labelledby="b-deb" hidden>
+        <p lang="en">If you haven't added the repository yet, do that first (<a href="../repository/">one time</a>). Then:</p>
+        <p lang="es">Si todavía no agregaste el repositorio, hazlo primero (<a href="../repository/">una sola vez</a>). Luego:</p>
+        <div class="code"><pre><code>sudo apt update &amp;&amp; sudo apt install ross-transcribe</code></pre></div>
+      </div>
+      <div class="panel" role="tabpanel" id="t-rpm" aria-labelledby="b-rpm" hidden>
+        <p lang="en">If you haven't added the repository yet, do that first (<a href="../repository/">one time</a>). Then:</p>
+        <p lang="es">Si todavía no agregaste el repositorio, hazlo primero (<a href="../repository/">una sola vez</a>). Luego:</p>
+        <div class="code"><pre><code>sudo dnf install ross-transcribe</code></pre></div>
+      </div>
+      <p class="small" lang="en">On macOS or without the repository: <code>uv tool install git+https://github.com/rossmelabasto/ross_transcribe</code> (needs Python 3.10+ and ffmpeg).</p>
+      <p class="small" lang="es">En macOS o sin el repositorio: <code>uv tool install git+https://github.com/rossmelabasto/ross_transcribe</code> (necesita Python 3.10+ y ffmpeg).</p>
+    </section>
+
+    <section id="use">
+      <h2 lang="en">Use</h2>
+      <h2 lang="es">Uso</h2>
+      <div class="code"><pre><code>transcribe                        # pick files from Downloads, search the machine or type a path
+transcribe meeting.m4a            # transcript on screen
+transcribe class.mp4 -t -o        # a .txt with timestamps next to the file
+transcribe video.mkv --srt -o     # subtitles
+transcribe note.ogg -l es         # tell it the language instead of detecting it
+transcribir                       # the same, with the interface and audio in Spanish</code></pre></div>
+      <p lang="en">The first time, it downloads the Whisper model from Hugging Face (about 460 MB for the default <code>small</code>). After that it works offline. <code>-m tiny</code> is faster and lighter; <code>-m large-v3-turbo</code> is more accurate and needs more memory.</p>
+      <p lang="es">La primera vez descarga el modelo de Whisper desde Hugging Face (unos 460 MB el <code>small</code>, que viene por defecto). Después funciona sin internet. <code>-m tiny</code> es más rápido y liviano; <code>-m large-v3-turbo</code> es más preciso y necesita más memoria.</p>
+    </section>
+
+    <section id="record">
+      <h2>record</h2>
+      <p lang="en">Comes in the same package. It records from the microphone with a live level meter and, when you stop, offers to transcribe what you said.</p>
+      <p lang="es">Viene en el mismo paquete. Graba del micrófono con un medidor de nivel en vivo y, cuando paras, te ofrece transcribir lo que dijiste.</p>
+      <div class="code"><pre><code>record                    # record until Ctrl+C, then: transcribe, save a .txt or nothing
+record -s -t idea         # start when you speak, stop after 3 s of silence, transcribe
+record class -c -o        # clean up the audio and save the transcript next to it
+record -l                 # list microphones; -i &lt;name&gt; picks one</code></pre></div>
+      <p class="small" lang="en">Recordings go to <code>~/Recordings</code>. It uses SoX and PipeWire (or PulseAudio).</p>
+      <p class="small" lang="es">Las grabaciones van a <code>~/Recordings</code>. Usa SoX y PipeWire (o PulseAudio). Sus mensajes están en inglés.</p>
+    </section>
+
+    <section id="requirements">
+      <h2 lang="en">Requirements</h2>
+      <h2 lang="es">Requisitos</h2>
+      <div class="table">
+        <table>
+          <tbody>
+            <tr><td lang="en">System</td><td lang="es">Sistema</td><td><span lang="en">Linux x86_64 with glibc 2.35 or newer</span><span lang="es">Linux x86_64 con glibc 2.35 o más nueva</span></td></tr>
+            <tr><td lang="en">Speed</td><td lang="es">Velocidad</td><td><span lang="en">On a recent CPU, a minute of audio takes a few seconds with the default model</span><span lang="es">En un CPU reciente, un minuto de audio tarda unos segundos con el modelo por defecto</span></td></tr>
+            <tr><td>GPU</td><td><span lang="en">Optional: an NVIDIA GPU is used when the CUDA 12 libraries are installed; otherwise it runs on the CPU</span><span lang="es">Opcional: usa una GPU NVIDIA si están instaladas las librerías de CUDA 12; si no, corre en el CPU</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="changes">
+      <h2 lang="en">Changes</h2>
+      <h2 lang="es">Cambios</h2>
+      <div class="changelog" lang="en">
+@CHANGELOG_EN:ross-transcribe@
+      </div>
+      <div class="changelog" lang="es">
+@CHANGELOG_ES:ross-transcribe@
+      </div>
+    </section>
+  </div></div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span lang="en">Made by <a href="https://portfolio.rossmel.com">Rossmel Abasto</a></span>
+    <span lang="es">Hecho por <a href="https://portfolio.rossmel.com">Rossmel Abasto</a></span>
+    <nav>
+      <a href="https://github.com/rossmelabasto/ross_transcribe"><span lang="en">Source code</span><span lang="es">Código</span></a>
+      <a href="https://github.com/rossmelabasto/ross_transcribe/issues"><span lang="en">Report a problem</span><span lang="es">Reportar un problema</span></a>
+      <a href="../"><span lang="en">All packages</span><span lang="es">Todos los paquetes</span></a>
+    </nav>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>

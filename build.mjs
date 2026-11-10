@@ -80,25 +80,42 @@ function rosRows() {
   return rows.join('\n');
 }
 
-const vis = {
-  version: read(join(fetched, 'visualizer/version')).trim().replace(/^v/, '') || '0.0.0',
-  en: renderChangelog(read(join(fetched, 'visualizer/CHANGELOG.md'))),
-  es: renderChangelog(read(join(fetched, 'visualizer/CHANGELOG.es.md'))),
-};
+// Each program's newest release: fetched/<name>/{version,CHANGELOG.md,CHANGELOG.es.md}.
+const programs = JSON.parse(readFileSync(join(root, 'programs.json'), 'utf8')).map(({ name, page }) => {
+  const dir = join(fetched, name);
+  const en = renderChangelog(read(join(dir, 'CHANGELOG.md')));
+  return {
+    name,
+    page,
+    version: read(join(dir, 'version')).trim().replace(/^v/, ''),
+    en,
+    // Programs without a Spanish changelog show the English one.
+    es: renderChangelog(read(join(dir, 'CHANGELOG.es.md'))) || en,
+  };
+});
 
-const fill = (html) =>
-  html
-    .replaceAll('@VIS_VERSION@', vis.version)
-    .replace('@VIS_CHANGELOG_EN@', () => vis.en)
-    .replace('@VIS_CHANGELOG_ES@', () => vis.es)
-    .replace('@ROS_PACKAGES@', () => rosRows());
+const fill = (html) => {
+  for (const p of programs) {
+    // A program without a release yet doesn't show up anywhere.
+    if (!p.version) {
+      html = html.replace(new RegExp(`\\s*<!--program:${p.name}-->[\\s\\S]*?<!--/program:${p.name}-->`, 'g'), '');
+      continue;
+    }
+    html = html
+      .replaceAll(`@VERSION:${p.name}@`, p.version || '—')
+      .replace(`@CHANGELOG_EN:${p.name}@`, () => p.en)
+      .replace(`@CHANGELOG_ES:${p.name}@`, () => p.es);
+  }
+  return html.replace('@ROS_PACKAGES@', () => rosRows());
+};
 
 mkdirSync(out, { recursive: true });
 cpSync(join(root, 'site'), out, {
   recursive: true,
   filter: (src) => !src.endsWith('.html'),
 });
-for (const page of ['index.html', 'repository/index.html', 'ross-visualizer/index.html', '404.html']) {
+const pages = ['index.html', 'repository/index.html', '404.html', ...programs.filter((p) => p.version).map((p) => `${p.page}/index.html`)];
+for (const page of pages) {
   const src = join(root, 'site', page);
   if (!existsSync(src)) continue;
   mkdirSync(dirname(join(out, page)), { recursive: true });
@@ -106,4 +123,4 @@ for (const page of ['index.html', 'repository/index.html', 'ross-visualizer/inde
 }
 // GitHub Pages: serve files and folders that start with "_" or "." as they are.
 writeFileSync(join(out, '.nojekyll'), '');
-console.log(`site: ross_visualizer ${vis.version}, ${rosRows().split('\n').filter(Boolean).length} rOS packages -> ${out}`);
+console.log(`site: ${programs.map((p) => `${p.name} ${p.version || '(none)'}`).join(', ')} -> ${out}`);
