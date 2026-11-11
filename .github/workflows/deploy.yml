@@ -48,6 +48,7 @@ jobs:
             echo "$name: $tag"
             mkdir -p "fetched/$name"
             echo "$tag" > "fetched/$name/version"
+            gh release view "$tag" -R "$repo" --json publishedAt --jq .publishedAt > "fetched/$name/date"
             for f in CHANGELOG.md CHANGELOG.es.md; do
               gh api "repos/$repo/contents/$f?ref=$tag" -H 'Accept: application/vnd.github.raw' > "fetched/$name/$f" 2>/dev/null || rm -f "fetched/$name/$f"
             done

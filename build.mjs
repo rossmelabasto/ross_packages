@@ -88,6 +88,7 @@ const programs = JSON.parse(readFileSync(join(root, 'programs.json'), 'utf8')).m
     name,
     page,
     version: read(join(dir, 'version')).trim().replace(/^v/, ''),
+    date: read(join(dir, 'date')).trim(),
     en,
     // Programs without a Spanish changelog show the English one.
     es: renderChangelog(read(join(dir, 'CHANGELOG.es.md'))) || en,
@@ -103,6 +104,8 @@ const fill = (html) => {
     }
     html = html
       .replaceAll(`@VERSION:${p.name}@`, p.version || '—')
+      .replaceAll(`@DATE:${p.name}@`, p.date)
+      .replaceAll(`@DATESHORT:${p.name}@`, p.date.slice(0, 10) || '—')
       .replace(`@CHANGELOG_EN:${p.name}@`, () => p.en)
       .replace(`@CHANGELOG_ES:${p.name}@`, () => p.es);
   }
