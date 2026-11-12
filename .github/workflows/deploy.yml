@@ -102,7 +102,11 @@ jobs:
             cp "$a" "_site/download/$name.apk"
           done
           if [ -z "$FDROID_KEYSTORE" ]; then echo "::warning::No FDROID_KEYSTORE: no F-Droid repository"; exit 0; fi
-          sudo apt-get install -y --no-install-recommends fdroidserver >/dev/null
+          # Ubuntu's fdroidserver is too old to read current APKs: the newest one from PyPI.
+          python3 -m venv "$RUNNER_TEMP/fdroidserver"
+          "$RUNNER_TEMP/fdroidserver/bin/pip" install -q fdroidserver
+          export PATH="$RUNNER_TEMP/fdroidserver/bin:$PATH"
+          fdroid --version
           work=$RUNNER_TEMP/fdroid
           mkdir -p "$work/repo/icons"
           cp -r fdroid/config.yml fdroid/metadata "$work/"
