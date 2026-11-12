@@ -109,6 +109,11 @@ const fill = (html) => {
       .replace(`@CHANGELOG_EN:${p.name}@`, () => p.en)
       .replace(`@CHANGELOG_ES:${p.name}@`, () => p.es);
   }
+  // The F-Droid part shows only once the repository exists (its fingerprint was written).
+  const fingerprint = read(join(fetched, 'fdroid-fingerprint')).trim();
+  html = fingerprint
+    ? html.replaceAll('@FDROID_FINGERPRINT@', fingerprint)
+    : html.replace(/<!--fdroid-->[\s\S]*?<!--\/fdroid-->/g, '');
   return html.replace('@ROS_PACKAGES@', () => rosRows());
 };
 

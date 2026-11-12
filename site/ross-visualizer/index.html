@@ -30,7 +30,7 @@
 <main>
   <section class="hero">
     <div class="wrap">
-      <p class="eyebrow"><span class="pill"><span lang="en">alpha</span><span lang="es">alfa</span></span> v@VERSION:ross-visualizer@ · Linux</p>
+      <p class="eyebrow"><span class="pill"><span lang="en">alpha</span><span lang="es">alfa</span></span> v@VERSION:ross-visualizer@ · Linux · Android</p>
       <h1>ross_visualizer</h1>
       <p class="lead" lang="en">Listens to everything your computer plays and paints it with the colors of the album art. Full screen, or as an overlay above your windows that lets clicks through. No audio source to pick and no account to sign in to.</p>
       <p class="lead" lang="es">Escucha todo lo que suena en tu compu y lo pinta con los colores de la portada. En pantalla completa o como overlay encima de tus ventanas, que deja pasar los clics. Sin elegir fuente de audio y sin iniciar sesión.</p>
@@ -132,6 +132,38 @@ sudo dnf install ross-visualizer</code></pre></div>
       <p class="small" lang="es">La primera vez que la abres, un tutorial corto te muestra las escenas, el overlay y los atajos de teclado para tu escritorio.</p>
     </section>
 
+    <section id="android">
+      <h2>Android</h2>
+      <p lang="en">The same scenes on your phone, reacting to everything it plays, plus the overlay above your other apps. Android 7.0 or newer. It's an alpha.</p>
+      <p lang="es">Las mismas escenas en tu celular, reaccionando a todo lo que suena, más el overlay encima de tus otras apps. Android 7.0 o más nuevo. Es una alfa.</p>
+<!--fdroid-->
+      <h3 lang="en">With F-Droid (updates on their own)</h3>
+      <h3 lang="es">Con F-Droid (se actualiza sola)</h3>
+      <p lang="en">With <a href="https://f-droid.org">F-Droid</a>, Droid-ify or Neo Store installed, open this on your phone and add the repository:</p>
+      <p lang="es">Con <a href="https://f-droid.org">F-Droid</a>, Droid-ify o Neo Store instalado, abre esto en tu celular y agrega el repositorio:</p>
+      <div class="actions"><a class="btn primary" href="fdroidrepos://repo.rossmel.com/fdroid/repo?fingerprint=@FDROID_FINGERPRINT@"><span lang="en">Add to F-Droid</span><span lang="es">Agregar a F-Droid</span></a></div>
+      <p class="small" lang="en">Or add it by hand, then search for ross_visualizer:</p>
+      <p class="small" lang="es">O agrégalo a mano y busca ross_visualizer:</p>
+      <div class="code"><pre><code>https://repo.rossmel.com/fdroid/repo?fingerprint=@FDROID_FINGERPRINT@</code></pre></div>
+<!--/fdroid-->
+      <h3 lang="en">Or download the APK</h3>
+      <h3 lang="es">O descarga el APK</h3>
+      <div class="actions"><a class="btn" href="../download/ross-visualizer.apk"><span lang="en">Download v@VERSION:ross-visualizer@ (APK)</span><span lang="es">Descargar v@VERSION:ross-visualizer@ (APK)</span></a></div>
+      <p class="small" lang="en">Android will ask you to allow installing from your browser. This way it doesn't update by itself.</p>
+      <p class="small" lang="es">Android te pedirá permitir la instalación desde tu navegador. Así no se actualiza sola.</p>
+      <h3 lang="en">The permissions it asks for</h3>
+      <h3 lang="es">Los permisos que pide</h3>
+      <div class="table">
+        <table>
+          <tbody>
+            <tr><td><span lang="en">Microphone</span><span lang="es">Micrófono</span></td><td><span lang="en">Android files the system's audio visualizer under it. Nothing is recorded and nothing leaves the phone.</span><span lang="es">Android clasifica ahí al visualizador de audio del sistema. No se graba nada y nada sale del teléfono.</span></td></tr>
+            <tr><td><span lang="en">Notification access</span><span lang="es">Acceso a notificaciones</span></td><td><span lang="en">To see which song is playing, its artwork, and to control it. It doesn't read your notifications.</span><span lang="es">Para ver qué canción suena, su portada y controlarla. No lee tus notificaciones.</span></td></tr>
+            <tr><td><span lang="en">Display over other apps</span><span lang="es">Mostrar sobre otras apps</span></td><td><span lang="en">Only for the overlay.</span><span lang="es">Solo para el overlay.</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
     <section id="shortcuts">
       <h2 lang="en">Keyboard shortcuts</h2>
       <h2 lang="es">Atajos de teclado</h2>
@@ -225,6 +257,7 @@ ross-visualizer overlay next</code></pre></div>
             <tr><td>pacman</td><td>CachyOS, Arch, EndeavourOS, Manjaro</td><td><code>ross-visualizer-bin</code></td></tr>
             <tr><td>APT</td><td><span lang="en">Ubuntu 22.04 or newer</span><span lang="es">Ubuntu 22.04 o más nueva</span>, Debian 13, Linux Mint, Pop!_OS</td><td><code>ross-visualizer</code></td></tr>
             <tr><td>DNF</td><td>Fedora</td><td><code>ross-visualizer</code></td></tr>
+            <tr><td>F-Droid · APK</td><td>Android 7.0+</td><td><a href="#android"><code>com.rossmel.visualizer</code></a></td></tr>
             <tr><td>AppImage</td><td><span lang="en">Any x86_64 distribution</span><span lang="es">Cualquier distribución x86_64</span></td><td><a href="https://github.com/rossmelabasto/ross_visualizer/releases"><span lang="en">Releases</span><span lang="es">Versiones</span></a></td></tr>
           </tbody>
         </table>

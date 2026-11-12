@@ -52,7 +52,7 @@ jobs:
             for f in CHANGELOG.md CHANGELOG.es.md; do
               gh api "repos/$repo/contents/$f?ref=$tag" -H 'Accept: application/vnd.github.raw' > "fetched/$name/$f" 2>/dev/null || rm -f "fetched/$name/$f"
             done
-            gh release download "$tag" -R "$repo" --dir packages --pattern '*.deb' --pattern '*.rpm' --pattern '*.pkg.tar.zst' \
+            gh release download "$tag" -R "$repo" --dir packages --pattern '*.deb' --pattern '*.rpm' --pattern '*.pkg.tar.zst' --pattern '*.apk' \
               || echo "::warning::$name $tag has no packages"
           done
           ls -la packages
@@ -85,6 +85,39 @@ jobs:
           bash scripts/repos.sh packages repos
           cp -r repos/. _site/
           rm -rf "$GNUPGHOME"
+
+      - name: The Android apps and their F-Droid repository
+        env:
+          FDROID_KEYSTORE: ${{ secrets.FDROID_KEYSTORE }}
+          FDROID_KEYSTORE_PASSWORD: ${{ secrets.FDROID_KEYSTORE_PASSWORD }}
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          apks=(packages/*.apk)
+          [ ${#apks[@]} -gt 0 ] || { echo "no APKs"; exit 0; }
+          # A stable link for a direct download.
+          mkdir -p _site/download
+          for a in "${apks[@]}"; do
+            name=$(basename "$a" | sed -E 's/-[0-9][0-9.]*\.apk$//')
+            cp "$a" "_site/download/$name.apk"
+          done
+          if [ -z "$FDROID_KEYSTORE" ]; then echo "::warning::No FDROID_KEYSTORE: no F-Droid repository"; exit 0; fi
+          sudo apt-get install -y --no-install-recommends fdroidserver >/dev/null
+          work=$RUNNER_TEMP/fdroid
+          mkdir -p "$work/repo/icons"
+          cp -r fdroid/config.yml fdroid/metadata "$work/"
+          cp fdroid/icon.png "$work/repo/icons/icon.png"
+          cp "${apks[@]}" "$work/repo/"
+          printf '%s' "$FDROID_KEYSTORE" | base64 -d > "$work/keystore.p12"
+          chmod 600 "$work/config.yml" "$work/keystore.p12"
+          (cd "$work" && ANDROID_HOME=$ANDROID_HOME fdroid update --verbose 2>&1 | tail -15)
+          mkdir -p _site/fdroid
+          cp -r "$work/repo" _site/fdroid/
+          # The repository's fingerprint, for the website and for clients that ask for it.
+          keytool -exportcert -alias repo -keystore "$work/keystore.p12" -storetype PKCS12 \
+            -storepass "$FDROID_KEYSTORE_PASSWORD" 2>/dev/null | sha256sum | cut -d' ' -f1 | tr a-z A-Z > fetched/fdroid-fingerprint
+          rm -f "$work/keystore.p12"
+          ls -la _site/fdroid/repo | head; cat fetched/fdroid-fingerprint
 
       - name: Fetch the rOS packages
         run: |

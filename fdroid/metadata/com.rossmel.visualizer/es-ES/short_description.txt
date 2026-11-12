@@ -1,0 +1,1 @@
+Visualizador de música que pinta con la portada de lo que suena

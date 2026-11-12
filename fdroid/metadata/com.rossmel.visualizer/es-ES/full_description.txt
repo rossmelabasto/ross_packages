@@ -1,0 +1,10 @@
+ross_visualizer escucha todo lo que suena en tu celular (Spotify, YouTube o cualquier app) y lo convierte en luz, con los colores de la portada de la canción.
+
+* Siete escenas: fluido, nebulosa, galaxia, aurora, caleidoscopio, túnel y una terminal.
+* La canción, su portada y anterior, play/pausa y siguiente para tu reproductor.
+* Un overlay encima de tus otras apps, en siete estilos, que deja pasar tus toques.
+* En vertical u horizontal, y en pantalla completa.
+
+Usa el visualizador de audio de Android, que Android clasifica como permiso de micrófono: no se graba nada y nada sale del teléfono. El acceso a notificaciones le deja ver qué canción suena; no lee tus notificaciones.
+
+Es una alfa. La misma app corre en Linux, y hay una demo web en https://visualizer.rossmel.com

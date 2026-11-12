@@ -1,0 +1,1 @@
+Music visualizer that paints with the album art of whatever plays

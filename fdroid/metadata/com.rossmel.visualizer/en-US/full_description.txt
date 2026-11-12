@@ -1,0 +1,10 @@
+ross_visualizer listens to everything your phone plays (Spotify, YouTube or any other app) and turns it into light, with the colors of the album art of the song that's on.
+
+* Seven scenes: fluid, nebula, galaxy, aurora, kaleidoscope, tunnel and a terminal.
+* The song, its artwork and previous, play/pause and next for your player.
+* An overlay above your other apps, in seven styles, that lets your touches through.
+* Upright or sideways, and full screen.
+
+It uses Android's audio visualizer, which Android files under the microphone permission: nothing is recorded and nothing leaves the phone. Notification access lets it see which song is playing; it doesn't read your notifications.
+
+It's an alpha. The same app runs on Linux, and there is a web demo at https://visualizer.rossmel.com
