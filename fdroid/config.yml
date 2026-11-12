@@ -2,7 +2,7 @@
 # The deploy workflow copies this next to the APKs and runs `fdroid update`; the keystore and its
 # password come from the FDROID_KEYSTORE and FDROID_KEYSTORE_PASSWORD secrets.
 repo_url: https://repo.rossmel.com/fdroid/repo
-repo_name: Rossmel's apps
+repo_name: rossmel's apps
 repo_description: >-
   Apps by Rossmel Abasto, signed and built from their GitHub releases. Programs for Linux live
   in the same repository site: https://repo.rossmel.com
