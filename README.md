@@ -10,6 +10,8 @@ repositories behind it.
   are files of the [`x86_64`](../../releases/tag/x86_64) release of this repo, which is also the
   fallback `Server` when the site doesn't answer.
 
+repo.rossmel.com itself is a Cloudflare Worker in front of GitHub Pages that counts downloads anonymously: see [worker/](worker/).
+
 No binaries live in git. `.github/workflows/deploy.yml` downloads the newest packages on each
 deploy, runs `build.mjs` over `site/` and publishes everything to GitHub Pages. A program's
 release triggers it by pushing its version to `sources/`.
