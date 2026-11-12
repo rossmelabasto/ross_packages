@@ -112,7 +112,9 @@ const fill = (html) => {
   // The F-Droid part shows only once the repository exists (its fingerprint was written).
   const fingerprint = read(join(fetched, 'fdroid-fingerprint')).trim();
   html = fingerprint
-    ? html.replaceAll('@FDROID_FINGERPRINT@', fingerprint)
+    ? html
+        .replaceAll('@FDROID_FINGERPRINT@', fingerprint)
+        .replaceAll('@FDROID_FINGERPRINT_SPACED@', fingerprint.replace(/(..)(?!$)/g, '$1 '))
     : html.replace(/<!--fdroid-->[\s\S]*?<!--\/fdroid-->/g, '');
   return html.replace('@ROS_PACKAGES@', () => rosRows());
 };
@@ -122,7 +124,7 @@ cpSync(join(root, 'site'), out, {
   recursive: true,
   filter: (src) => !src.endsWith('.html'),
 });
-const pages = ['index.html', 'repository/index.html', '404.html', ...programs.filter((p) => p.version).map((p) => `${p.page}/index.html`)];
+const pages = ['index.html', 'repository/index.html', '404.html', ...(read(join(fetched, 'fdroid-fingerprint')).trim() ? ['fdroid/repo/index.html'] : []), ...programs.filter((p) => p.version).map((p) => `${p.page}/index.html`)];
 for (const page of pages) {
   const src = join(root, 'site', page);
   if (!existsSync(src)) continue;

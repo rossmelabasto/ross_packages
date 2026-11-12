@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>(function(){var l;try{l=localStorage.getItem('lang')}catch(e){}if(l!=='en'&&l!=='es'){var n=(navigator.languages&&navigator.languages[0])||navigator.language||'en';l=/^es/i.test(n)?'es':'en'}document.documentElement.dataset.lang=l;document.documentElement.lang=l})();</script>
+<title>F-Droid repository · rOS packages</title>
+<meta name="title-en" content="F-Droid repository · rOS packages">
+<meta name="title-es" content="Repositorio F-Droid · paquetes de rOS">
+<meta name="description" content="The F-Droid repository of Rossmel's Android apps: add it once to F-Droid, Droid-ify or Neo Store and the apps update on their own.">
+<meta name="theme-color" content="#0b0d0a">
+<link rel="icon" href="../../assets/ros-logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  .qr { display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: center; margin: 8px 0 18px; }
+  .qr img { width: 168px; height: 168px; padding: 10px; border-radius: 14px; background: #fff; image-rendering: pixelated; }
+  .fp { font: 13px/1.7 var(--mono); word-break: break-all; color: var(--text); }
+  @media (max-width: 560px) { .qr { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../"><img src="../../assets/ros-logo-white.svg" alt=""><span>rOS</span><span class="sub">/ packages</span></a>
+    <nav class="nav">
+      <a href="../../"><span lang="en">All programs</span><span lang="es">Todos los programas</span></a>
+      <a href="../../ross-visualizer/#android">ross_visualizer ↗</a>
+      <a href="https://f-droid.org">F-Droid ↗</a>
+    </nav>
+    <button class="lang" type="button">ES</button>
+  </div>
+</header>
+
+<main class="wrap narrow">
+  <section class="hero" style="padding-bottom: 8px">
+    <p class="eyebrow"><span class="pill">Android</span> repo.rossmel.com/fdroid/repo</p>
+    <h1 lang="en">F-Droid repository</h1>
+    <h1 lang="es">Repositorio F-Droid</h1>
+    <p class="lead" lang="en">My Android apps, signed and built from their GitHub releases. Add it once to F-Droid, Droid-ify or Neo Store and the apps update on their own.</p>
+    <p class="lead" lang="es">Mis apps para Android, firmadas y hechas desde sus releases de GitHub. Agrégalo una vez a F-Droid, Droid-ify o Neo Store y las apps se actualizan solas.</p>
+    <div class="actions">
+      <a class="btn primary" href="fdroidrepos://repo.rossmel.com/fdroid/repo?fingerprint=@FDROID_FINGERPRINT@"><span lang="en">Add to F-Droid</span><span lang="es">Agregar a F-Droid</span></a>
+      <a class="btn" href="../../ross-visualizer/#android"><span lang="en">The apps</span><span lang="es">Las apps</span></a>
+    </div>
+  </section>
+
+  <section id="add">
+    <h2 lang="en">From another device</h2>
+    <h2 lang="es">Desde otro dispositivo</h2>
+    <div class="qr">
+      <img src="index.png" alt="QR code with the repository's address">
+      <div>
+        <p lang="en">Scan it with your phone's camera or from F-Droid (Settings → Repositories → +), or paste the address:</p>
+        <p lang="es">Escanéalo con la cámara del celular o desde F-Droid (Ajustes → Repositorios → +), o pega la dirección:</p>
+        <div class="code"><pre><code>https://repo.rossmel.com/fdroid/repo?fingerprint=@FDROID_FINGERPRINT@</code></pre></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="fingerprint">
+    <h2 lang="en">Fingerprint</h2>
+    <h2 lang="es">Huella</h2>
+    <p lang="en">The SHA-256 fingerprint of the key that signs the repository. Your F-Droid app checks it; if you add the address by hand, it should match:</p>
+    <p lang="es">La huella SHA-256 de la clave que firma el repositorio. Tu app de F-Droid la comprueba; si agregas la dirección a mano, debería coincidir:</p>
+    <p class="fp">@FDROID_FINGERPRINT_SPACED@</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span lang="en">Made by <a href="https://portfolio.rossmel.com">Rossmel Abasto</a></span>
+    <span lang="es">Hecho por <a href="https://portfolio.rossmel.com">Rossmel Abasto</a></span>
+    <nav>
+      <a href="../../"><span lang="en">Packages</span><span lang="es">Paquetes</span></a>
+      <a href="https://github.com/rossmelabasto/ross_packages">GitHub</a>
+    </nav>
+  </div>
+</footer>
+<script src="../../assets/site.js"></script>
+</body>
+</html>
