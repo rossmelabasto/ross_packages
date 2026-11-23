@@ -2,7 +2,7 @@ name: Deploy
 
 # Publishes repo.rossmel.com: the website and the signed package repositories.
 #   [ross]  every program in programs.json, from its newest GitHub release, signed here
-#   [ros]   the rOS packages, already signed, from the x86_64 release of this repo (not advertised)
+#           (it also holds the rOS packages: the x86_64 release of this repo is their store)
 # Binaries are never committed: every deploy downloads them again.
 #
 # Runs when this repo changes (a program's release pushes its version to sources/, the rOS
@@ -132,23 +132,24 @@ jobs:
           rm -f "$work/keystore.p12"
           ls -la _site/fdroid/repo | head; cat fetched/fdroid-fingerprint
 
-      - name: Fetch the rOS packages
+      - name: List the rOS packages for the website
+        # They are already in [ross] (fetched above into packages/). The old [ros] repository
+        # (/x86_64 and /ros.gpg) was retired on 2026-11-22.
         run: |
           set -euo pipefail
-          mkdir -p _site/x86_64 fetched/ros
-          gh release download x86_64 -R "$GITHUB_REPOSITORY" --dir _site/x86_64
-          mv _site/x86_64/ros.gpg _site/ros.gpg
-          ls _site/x86_64 | while read -r f; do : > "fetched/ros/$f"; done
+          mkdir -p fetched/ros
+          for f in packages/*.pkg.tar.zst; do : > "fetched/ros/$(basename "$f")"; done
 
       - run: node build.mjs _site
 
       - name: Check what pacman, apt and dnf will ask for
         run: |
           set -euo pipefail
-          for f in key.asc arch/x86_64/ross.db arch/x86_64/ross.db.sig apt/dists/stable/InRelease rpm/ross.repo rpm/repodata/repomd.xml x86_64/ros.db ros.gpg check.sh; do
+          for f in key.asc arch/x86_64/ross.db arch/x86_64/ross.db.sig apt/dists/stable/InRelease rpm/ross.repo rpm/repodata/repomd.xml check.sh; do
             test -s "_site/$f" || { echo "::error::missing $f"; exit 1; }
           done
           tar -tzf _site/arch/x86_64/ross.db | grep '/$'
+          tar -tzf _site/arch/x86_64/ross.db | grep -q '^ros-keyring-' || { echo '::error::ros-keyring missing from ross.db'; exit 1; }
           grep '^Package:' _site/apt/dists/stable/main/binary-amd64/Packages
 
       - uses: actions/upload-pages-artifact@v3
