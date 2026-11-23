@@ -60,6 +60,15 @@ jobs:
           tag=$(cat fetched/ross-visualizer/version)
           gh api "repos/rossmelabasto/ross_visualizer/contents/scripts/check.sh?ref=$tag" -H 'Accept: application/vnd.github.raw' > _site/check.sh
 
+      - name: Fetch the rOS packages into the same pool
+        # The rOS packages (ros-*, dms-greeter) are assets of this repo's x86_64 release. They go
+        # into packages/ so that repos.sh signs them with the same key and puts them in [ross]:
+        # one repository for everything.
+        run: |
+          set -euo pipefail
+          gh release download x86_64 -R "$GITHUB_REPOSITORY" --dir packages --pattern '*.pkg.tar.zst'
+          ls packages | grep -c 'pkg.tar.zst'
+
       - name: Install repository tools
         run: |
           sudo apt-get update
