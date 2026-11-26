@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>(function(){var l;try{l=localStorage.getItem('lang')}catch(e){}if(l!=='en'&&l!=='es'){var n=(navigator.languages&&navigator.languages[0])||navigator.language||'en';l=/^es/i.test(n)?'es':'en'}document.documentElement.dataset.lang=l;document.documentElement.lang=l})();</script>
+<title>ross_tcgp · rOS packages</title>
+<meta name="title-en" content="ross_tcgp · rOS packages">
+<meta name="title-es" content="ross_tcgp · paquetes de rOS">
+<meta name="description" content="Read your Pokémon TCG Pocket collection from an Android phone over adb and save it as JSON. Install it with pacman, APT or DNF.">
+<meta name="theme-color" content="#0b0d0a">
+<link rel="icon" href="../assets/ros-logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../"><img src="../assets/ros-logo-white.svg" alt=""><span>rOS</span><span class="sub">/ packages</span></a>
+    <nav class="nav">
+      <a href="../"><span lang="en">All programs</span><span lang="es">Todos los programas</span></a>
+      <a href="../repository/"><span lang="en">Add the repository</span><span lang="es">Agregar el repositorio</span></a>
+      <a href="https://github.com/rossmelabasto/ross_tcgp"><span lang="en">Source code ↗</span><span lang="es">Código ↗</span></a>
+      <a href="https://ros.rossmel.com">rOS ↗</a>
+    </nav>
+    <button class="lang" type="button">ES</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">v@VERSION:ross-tcgp@ · Linux · <span lang="en">terminal</span><span lang="es">terminal</span></p>
+      <h1>ross_tcgp</h1>
+      <p class="lead" lang="en">The game has no export, so this drives the phone: over adb it scrolls the <b>My Cards</b> screen of Pokémon TCG Pocket, recognises every card against ~4,600 official images, reads how many copies you own and saves it all as JSON. Then <code>--quick</code> only reads your new packs, in about 15 seconds.</p>
+      <p class="lead" lang="es">El juego no tiene exportación, así que esto maneja el teléfono: por adb recorre la pantalla <b>My Cards</b> de Pokémon TCG Pocket, reconoce cada carta contra ~4.600 imágenes oficiales, lee cuántas copias tienes y lo guarda todo en JSON. Después, <code>--quick</code> lee solo tus sobres nuevos, en unos 15 segundos.</p>
+      <div class="actions">
+        <a class="btn primary" href="#install"><span lang="en">Install</span><span lang="es">Instalar</span></a>
+        <a class="btn" href="https://github.com/rossmelabasto/ross_tcgp"><span lang="en">Source code</span><span lang="es">Código</span></a>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="narrow">
+    <section id="install">
+      <h2 lang="en">Install</h2>
+      <h2 lang="es">Instalar</h2>
+      <p lang="en">From the signed <a href="../repository/">repository</a>. It uses your system's Python, Pillow, NumPy and adb, which come as dependencies.</p>
+      <p lang="es">Desde el <a href="../repository/">repositorio firmado</a>. Usa el Python, Pillow, NumPy y adb de tu sistema, que llegan como dependencias.</p>
+
+      <div class="tabs" role="tablist" aria-label="Distribution">
+        <button role="tab" type="button" aria-selected="true" aria-controls="t-arch" id="b-arch" data-os="arch">CachyOS · Arch</button>
+        <button role="tab" type="button" aria-selected="false" aria-controls="t-deb" id="b-deb" data-os="deb">Ubuntu · Debian</button>
+        <button role="tab" type="button" aria-selected="false" aria-controls="t-rpm" id="b-rpm" data-os="rpm">Fedora</button>
+      </div>
+      <div class="panel" role="tabpanel" id="t-arch" aria-labelledby="b-arch">
+        <p lang="en">If you haven't added the repository yet, do that first (<a href="../repository/">one time</a>). Then:</p>
+        <p lang="es">Si todavía no agregaste el repositorio, hazlo primero (<a href="../repository/">una sola vez</a>). Luego:</p>
+        <div class="code"><pre><code>sudo pacman -Syu ross-tcgp</code></pre></div>
+      </div>
+      <div class="panel" role="tabpanel" id="t-deb" aria-labelledby="b-deb" hidden>
+        <p lang="en">If you haven't added the repository yet, do that first (<a href="../repository/">one time</a>). Then:</p>
+        <p lang="es">Si todavía no agregaste el repositorio, hazlo primero (<a href="../repository/">una sola vez</a>). Luego:</p>
+        <div class="code"><pre><code>sudo apt update &amp;&amp; sudo apt install ross-tcgp</code></pre></div>
+      </div>
+      <div class="panel" role="tabpanel" id="t-rpm" aria-labelledby="b-rpm" hidden>
+        <p lang="en">If you haven't added the repository yet, do that first (<a href="../repository/">one time</a>). Then:</p>
+        <p lang="es">Si todavía no agregaste el repositorio, hazlo primero (<a href="../repository/">una sola vez</a>). Luego:</p>
+        <div class="code"><pre><code>sudo dnf install ross-tcgp</code></pre></div>
+      </div>
+      <p class="small" lang="en">Then run <code>ross-tcgp update</code> once: it downloads the card data and reference images (~70 MB) into <code>~/.cache/ross_tcgp</code>. No game images are shipped in the package.</p>
+      <p class="small" lang="es">Luego corre <code>ross-tcgp update</code> una vez: descarga los datos de las cartas y las imágenes de referencia (~70 MB) a <code>~/.cache/ross_tcgp</code>. El paquete no trae ninguna imagen del juego.</p>
+    </section>
+
+    <section id="use">
+      <h2 lang="en">Use</h2>
+      <h2 lang="es">Uso</h2>
+      <p lang="en">Enable USB debugging on the phone, connect it, open the game on <b>My Cards</b> and don't touch it while it scans:</p>
+      <p lang="es">Activa la depuración USB en el teléfono, conéctalo, abre el juego en <b>My Cards</b> y no lo toques mientras escanea:</p>
+      <div class="code"><pre><code>ross-tcgp scan             # the whole collection (~5 min for ~900 cards)
+ross-tcgp scan --quick     # only new cards: sort the game list by "Recent cards" first
+ross-tcgp show --name pika # list what you own
+ross-tcgp show --json      # the raw JSON, for other tools
+ross-tcgp diff OLD.json    # what changed since an older scan</code></pre></div>
+      <p lang="en">Every scan is saved in <code>~/.local/share/ross_tcgp</code> and compared with the previous one: new cards and extra copies are listed at the end.</p>
+      <p lang="es">Cada escaneo se guarda en <code>~/.local/share/ross_tcgp</code> y se compara con el anterior: al final lista las cartas nuevas y las copias extra. Sus mensajes están en inglés.</p>
+    </section>
+
+    <section id="requirements">
+      <h2 lang="en">Requirements</h2>
+      <h2 lang="es">Requisitos</h2>
+      <div class="table">
+        <table>
+          <tbody>
+            <tr><td lang="en">Computer</td><td lang="es">Computadora</td><td><span lang="en">Linux with Python 3.10+</span><span lang="es">Linux con Python 3.10+</span></td></tr>
+            <tr><td lang="en">Phone</td><td lang="es">Teléfono</td><td><span lang="en">Android with USB debugging and Pokémon TCG Pocket</span><span lang="es">Android con depuración USB y Pokémon TCG Pocket</span></td></tr>
+            <tr><td lang="en">Note</td><td lang="es">Nota</td><td><span lang="en">Fan project, not affiliated with Nintendo, The Pokémon Company, Creatures, GAME FREAK or DeNA. It only scrolls and takes screenshots.</span><span lang="es">Proyecto de fans, sin relación con Nintendo, The Pokémon Company, Creatures, GAME FREAK ni DeNA. Solo hace scroll y capturas.</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="changes">
+      <h2 lang="en">Changes</h2>
+      <h2 lang="es">Cambios</h2>
+      <div class="changelog" lang="en">
+@CHANGELOG_EN:ross-tcgp@
+      </div>
+      <div class="changelog" lang="es">
+@CHANGELOG_ES:ross-tcgp@
+      </div>
+    </section>
+  </div></div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span lang="en">Made by <a href="https://portfolio.rossmel.com">Rossmel Abasto</a></span>
+    <span lang="es">Hecho por <a href="https://portfolio.rossmel.com">Rossmel Abasto</a></span>
+    <nav>
+      <a href="https://github.com/rossmelabasto/ross_tcgp"><span lang="en">Source code</span><span lang="es">Código</span></a>
+      <a href="https://github.com/rossmelabasto/ross_tcgp/issues"><span lang="en">Report a problem</span><span lang="es">Reportar un problema</span></a>
+      <a href="../"><span lang="en">All packages</span><span lang="es">Todos los paquetes</span></a>
+    </nav>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>
