@@ -152,8 +152,8 @@ jobs:
           tar -tzf _site/arch/x86_64/ross.db | grep -q '^ros-keyring-' || { echo '::error::ros-keyring missing from ross.db'; exit 1; }
           grep '^Package:' _site/apt/dists/stable/main/binary-amd64/Packages
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
