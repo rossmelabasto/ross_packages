@@ -80,7 +80,11 @@
 ross-tcgp scan --quick     # only new cards: sort the game list by "Recent cards" first
 ross-tcgp show --name pika # list what you own
 ross-tcgp show --json      # the raw JSON, for other tools
-ross-tcgp diff OLD.json    # what changed since an older scan</code></pre></div>
+ross-tcgp diff OLD.json    # what changed since an older scan
+ross-tcgp export           # CSV for PackProphet or a spreadsheet
+ross-tcgp export -f tcg-tracker   # CSV for tcgpocketcollectiontracker.com</code></pre></div>
+      <p lang="en">With <code>export</code> your collection goes to other trackers in seconds: <a href="https://packprophet.spibane.com">PackProphet</a> (which pack to open next; <i>Collection → Import</i>, no account) or <a href="https://tcgpocketcollectiontracker.com">TCG Pocket Collection Tracker</a> (trades and friends; log in → <i>Import</i>, which replaces your collection there).</p>
+      <p lang="es">Con <code>export</code> tu colección pasa a otros trackers en segundos: <a href="https://packprophet.spibane.com">PackProphet</a> (qué sobre abrir; <i>Collection → Import</i>, sin cuenta) o <a href="https://tcgpocketcollectiontracker.com">TCG Pocket Collection Tracker</a> (intercambios y amigos; inicia sesión → <i>Import</i>, que reemplaza tu colección allá).</p>
       <p lang="en">Every scan is saved in <code>~/.local/share/ross_tcgp</code> and compared with the previous one: new cards and extra copies are listed at the end.</p>
       <p lang="es">Cada escaneo se guarda en <code>~/.local/share/ross_tcgp</code> y se compara con el anterior: al final lista las cartas nuevas y las copias extra. Sus mensajes están en inglés.</p>
     </section>
